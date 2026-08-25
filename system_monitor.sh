@@ -89,5 +89,38 @@ echo
 echo
 
 
+echo "--------Top CPU & Memory Processes-------------"
+
+#-----------------------------
+#Top CPU Processes
+#-----------------------------
+
+echo "Top 5 CPU-consuming processes:"
+ps aux --sort=-%cpu | head -n 6
+
+
+#--------------------------
+#Top Memory Processes
+#--------------------------
+
+echo "Top 5 Memory-consuming processes:"
+ps aux --sort=-%mem | head -n 6
+
+
+
+echo "=============================="
+echo "   MONITORING COMPLETED"
+echo "=============================="
+
+echo
+echo
+
+
+echo "$(date '+%Y-%m-%d %H:%M:%S') - System Monitoring Completed!!!" >> "$LOG_FILE"
+
+echo
+echo "Log file: $LOG_FILE"
+echo
+echo
 
 
