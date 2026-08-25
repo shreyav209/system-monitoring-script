@@ -8,8 +8,8 @@ echo "======================================"
 #Configuration
 #--------------------------------------
 
-DISK_THRESHOLD=10
-MEMORY_THRESHOLD=10
+DISK_THRESHOLD=80
+MEMORY_THRESHOLD=80
 
 LOG_DIR="logs"
 LOG_FILE="$LOG_DIR/system-monitor.log"
@@ -61,4 +61,33 @@ fi
 echo
 echo
 echo
+
+
+
+echo "--------------Memory Usage-------------"
+#--------------------------------
+#Memory usage
+#--------------------------------
+
+memory_usage=$(free | awk '/Mem:/ {printf "%.0f", $3/$2 * 100}')
+
+echo "Memory usage : $memory_usage%"
+
+if [ "$memory_usage" -ge "$MEMORY_THRESHOLD" ]
+then
+        echo "WARNING: Memory usage is above ${MEMORY_THRESHOLD}%"
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - WARNING: Memory usage is ${memory_usage}%" >> "$LOG_FILE"
+
+else
+        echo "Memory usage is normal"
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - Memory usage is normal: ${memory_usage}%" >> "$LOG_FILE"
+fi
+
+
+echo
+echo
+echo
+
+
+
 
